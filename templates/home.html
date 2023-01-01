@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Current Wheather Website</title>
+</head>
+<style>
+
+.row-x:hover > .searchInput {
+    width: 240px;
+    padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+  background: white;
+  color : #2f3640;
+}
+
+.searchButton {
+    color: white;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+@media screen and (max-width: 620px) {
+.row-x:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+}
+}
+.topnav {
+  overflow: hidden;
+  background-color: #719bbe;
+  
+}
+.topnav a {
+  float: left;
+  display: block;
+  color: rgb(2, 253, 169);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: rgb(232, 64, 64);
+}
+
+</style>
+<div class="bg">
+<div class="container-fluid px-1 px-sm-3 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="row card0">
+           
+            <div class="card1 col-lg-8 col-md-7">
+                <div class="topnav">
+                    <a class="active" href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                <img src="{{url_for('static',filename='img/logo-w.png')}}"  width = "35" height = "35"> 
+                </div>
+                <div class="text-center">
+                    <img class="image mt-5" src="{{url_for('static',filename='img/R.jpeg')}}" height="500" width="500">
+                </div>
+                <form action="/" method="POST">
+                <div class="row px-3 mt-3 mb-3">
+                    <h1 class="large-font mr-3">{{temperature}}&#176;</h1>
+                    <small>{{Current_Date}}</small>
+                    <small>Monday</small>
+                    <div class="d-flex flex-column mr-1">
+                        <h2 class="mt-3 mb-0">{{city_name}}</h2>
+                    </div>
+                            </div>
+                            </div>
+                                <div class="card2 col-lg-4 col-md-5">
+                                    <div class="row-x">
+                                        <input class="searchInput"type="text" name="city" placeholder="Enter location to Search....">
+                                        <button class="searchButton" href="#">
+                                            <i class="material-icons">
+                                                search
+                                            </i>
+                                        </button>
+                                    </div>
+                            
+                                </form>
+                                <br>
+                                <br>
+                                <div class="mr-6"> 
+                                    <p class="light-text suggestion">India</p>
+                                    <p class="light-text suggestion">Andra Pradesh</p>
+                                    <p class="light-text suggestion">New York</p>
+                                    <p class="light-text suggestion">London</p>
+                                    <p class="light-text suggestion">Examples :location to search </p>
+                                    <div class="line my-5"></div>
+                                 
+                                    <h1 class="btn btn-primary">{{city_name}}</h1>    
+                                    <u><h4>Weather Details</h4></u>
+                                    {%  if city_name %}
+                                    {% if condition=='Rain' %}
+                                    <div class="output-logo">
+                                    <img src="{{url_for('static', filename='img/rain.png')}}">
+                                    <br><br>
+                                    <p>{{desc}}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if condition=='Clear' %}
+                                    <div class="output-logo">
+                                    <img src="{{url_for('static', filename='img/clear sky.png')}}"><br>
+                                    <p>{{desc}}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if condition=='Clouds' %}
+                                    <div class="output-logo">
+                                    <img src="{{url_for('static', filename='img/cloudy.png')}}"><br>
+                                    <p>{{desc}}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if condition=='Thunderstorm' %}
+                                    <div class="output-logo">
+                                    <img src="{{url_for('static', filename='img/overcast.png')}}"><br>
+                                    <p>{{desc}}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% if condition=='Haze' %}
+                                    <div class="output-logo">
+                                    <img src="{{url_for('static', filename='img/blue sky.png')}}"><br>
+                                    <p>{{desc}}</p>
+                                    </div>
+                                    {% endif %}       
+                                    
+                                    <div class="row px-3">
+                                        <p class="light-text">Humidity:</p>
+                                        <p class="ml-auto">{{humidity}} %</p>
+                                    </div>
+                                    <div class="row px-3">
+                                        <p class="light-text">Wind:</p>
+                                        <p class="ml-auto">{{wind}} Km/h</p>
+                                    </div>
+                                    <div class="row px-3">
+                                       <p class="light-text">Pressure:</p>
+                                        <p class="ml-auto">{{pressure}} mb</p>
+                                    </div>
+
+                                    <div class="line mt-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                    <h3 style="color:red; padding:30px;font-size:35px; font-weight:bold; font-family:'Courier New', Courier, monospace; text-transform: uppercase;">API calls over !!! Wheather Report</h3>
+                    {% endif %} 
+    </div>
+</div>
+            <div class="head-git"><p style="color:blue">Praveen rightss!! <a style="color:rgb(185, 87, 87)" href="https://github.com/R-Coder07/Cloud-Wheather-Website" class="nav__link">Github-Page</a></h2></div> 
+            <div class="head"><p style="color:black"> Copyright &copy; Cloud Weather 2022</h2></div>
+</html>
